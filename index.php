@@ -10,30 +10,18 @@ require('dbconnect.php');
 
 echo "<b>Welcome to StarLog! this is the first setup, quick and dirty. Will refactor/update/refine after first things work!</b><br /><br />";
 
-
-/**
- * Select all rows from table 'Logs'
- */
-$sql = "SELECT * from logs";
-$result = $connection->query($sql);
-
-/**
- * Get the results from observations list
- */
-if ($result->num_rows > 0){
-    while($row = $result->fetch_assoc()){
-        echo "Object: "          . utf8_encode($row['object']) . "<br />";
-        echo "Object location: " . utf8_encode($row['object_location']) . "<br />";
-        echo "Type object: "     . utf8_encode($row['object_type']) . "<br />";
-        echo "Magnitude: "       . utf8_encode($row['magnitude']) . "<br />";
-        echo "Equipment: "       . utf8_encode($row['equipment']) . "<br />";
-        echo "Observing site: "  . utf8_encode($row['observing_location']) . "<br />";
-        echo "Observing date: "  . utf8_encode($row['observing_date']) . "<br />";
-        echo "Notes: "           . utf8_encode($row['notes']) . "<br />";
+try {
+    foreach($connection->query('SELECT * from logs') as $row) {
+        echo "Object: "          . $row['object'] . "<br />";
+        echo "Object location: " . $row['object_location'] . "<br />";
+        echo "Type object: "     . $row['object_type'] . "<br />";
+        echo "Magnitude: "       . $row['magnitude'] . "<br />";
+        echo "Equipment: "       . $row['equipment'] . "<br />";
+        echo "Observing site: "  . $row['observing_location'] . "<br />";
+        echo "Observing date: "  . $row['observing_date'] . "<br />";
+        echo "Notes: "           . $row['notes'] . "<br />";
     }
+    $dbh = null;
+} catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
 }
-
-/**
- * CLose the database
- */
-mysqli_close($connection);

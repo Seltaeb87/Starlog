@@ -12,16 +12,7 @@
 /**
  * Connect to database starlog
  */
-$name = 'root';
+$user = 'root';
 $password = '';
-$host = 'localhost';
-$database = 'starlog';
 
-$connection = mysqli_connect($host, $name, $password, $database);
-
-/**
- * Check if connection is established
- */
-if ($connection != true) {
-    echo 'error';
-}
+$connection = new PDO('mysql:host=localhost;dbname=starlog', $user, $password);
