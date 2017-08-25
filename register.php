@@ -6,6 +6,8 @@
  * Time: 11:26
  */
 
+require('dbconnect.php');
+
 ?>
 
 <form action ="register.php" method="POST">
@@ -34,12 +36,32 @@
 
 <?php
 
-$input = ['Username', 'Firstname', 'Lastname', 'Password', 'Location'];
+//$input = ['Username', 'firstname', 'lastname', 'Password', 'Location'];
+//
+//if (isset($_POST['submit'])){
+//    foreach ($input AS $item){
+//        if (!isset($_POST[$item]) || empty($_POST[$item])){
+//            echo 'Field ' . $item . ' is missing. Please fill in the form.<br />';
+//        }
+//    }
+//}
 
-if (isset($_POST['submit'])){
-    foreach ($input AS $item){
-        if (!isset($_POST[$item]) || empty($_POST[$item])){
-            echo 'Field ' . $item . ' is missing. Please fill in the form.<br />';
-        }
-    }
+$username = $_POST['username'];
+$firstname = $_POST['firstname'];
+$lastname = $_POST['lastname'];
+$password = $_POST['password'];
+$location = $_POST['location'];
+
+try {
+    $stmt = $connection->prepare("INSERT INTO users (username, firstname, lastname, password, location) VALUES (:username, :firstname, :lastname, :password, :location)");
+
+    $stmt->bindParam(':username', $username);
+    $stmt->bindParam(':firstname', $firstname);
+    $stmt->bindParam(':lastname', $lastname);
+    $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':location', $location);
+
+    $stmt->execute();
+}catch (PDOException $e){
+    echo $e;
 }
