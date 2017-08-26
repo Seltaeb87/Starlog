@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 12, 2017 at 02:38 PM
+-- Generation Time: Aug 26, 2017 at 03:24 PM
 -- Server version: 5.7.17
 -- PHP Version: 5.6.30
 
@@ -56,11 +56,18 @@ INSERT INTO `logs` (`ID`, `object`, `object_location`, `object_type`, `magnitude
 CREATE TABLE `users` (
   `ID` int(11) NOT NULL,
   `username` tinytext NOT NULL,
-  `first_name` tinytext NOT NULL,
-  `last_name` tinytext NOT NULL,
+  `firstname` tinytext NOT NULL,
+  `lastname` tinytext NOT NULL,
   `password` tinytext NOT NULL,
   `location` tinytext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`ID`, `username`, `firstname`, `lastname`, `password`, `location`) VALUES
+(1, 'Test01', 'Test01', 'Test01', '$2y$10$DQhgQcbJpajFbDzfRiAc9eviL893ovAx3GZOV6CDO6NPsZ2kABWn.', 'Test01');
 
 --
 -- Indexes for dumped tables
@@ -91,7 +98,7 @@ ALTER TABLE `logs`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
